@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: dev
+  data:
+    mongodb:
+      uri: mongodb+srv://${NIKODAY_MONGODB_USERNAME}:${NIKODAY_MONGODB_PASSWORD}@${NIKODAY_MONGODB_HOST}/nikoday-dev?retryWrites=true&w=majority
+logging:
+  level:
+    root: INFO
+    org.apache: INFO
+    org.springframework: INFO
+    org.hibernate: INFO
+    org.mongodb: INFO
+    org.frekele.nikoday: DEBUG

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <logger name="root" level="OFF" />
+    <logger name="org.apache" level="OFF" />
+    <logger name="org.springframework" level="OFF" />
+    <logger name="org.hibernate" level="OFF" />
+    <logger name="org.mongodb" level="OFF" />
+    <logger name="org.frekele.nikoday" level="OFF" />
+
+</configuration>
