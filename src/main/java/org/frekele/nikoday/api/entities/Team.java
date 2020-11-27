@@ -27,7 +27,6 @@ public class Team extends PersistentBaseEntity<String> {
     private String name;
 
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
-    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private ConfigTeam config;
 
     @Override

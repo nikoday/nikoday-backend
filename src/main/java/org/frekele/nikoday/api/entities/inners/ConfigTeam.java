@@ -8,7 +8,6 @@ import org.frekele.nikoday.core.entities.BaseEntity;
 import org.frekele.nikoday.core.validations.OnCreate;
 import org.frekele.nikoday.core.validations.OnUpdate;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -20,7 +19,6 @@ public class ConfigTeam extends BaseEntity {
     private static final long serialVersionUID = 2804131198761832701L;
 
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
-    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private Boolean disabled;
 
     @Override
