@@ -1,1 +1,52 @@
+language: java
+jdk:
+    - openjdk11
 
+cache:
+    directories:
+        - ${HOME}/.m2
+
+before_install:
+    - ulimit -a && free -m
+    - chmod +x -R .mvn/*
+    - chmod +x mvnw
+    
+install:
+
+
+addons:
+    sonarcloud:
+        organization: "nikoday"
+        token:
+            secure: "${SONAR_TOKEN}"
+script:
+    - ./mvnw install -B -V
+    - ./mvnw clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=nikoday_nikoday-backend
+    - ulimit -a && free -m
+
+before_cache:
+
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
+
+after_failure:
+    - echo "FAILURE"
+    - ulimit -a
+    - free -m
+
+before_deploy:
+
+
+#deploy:
+#    provider: heroku
+#    api_key:
+#        secure: "${HEROKU_API_KEY}"
+#    app:
+#        main: test-nikoday-backend
+#        sandbox: sandbox-nikoday-backend
+
+after_deploy:
+
+after_script:
