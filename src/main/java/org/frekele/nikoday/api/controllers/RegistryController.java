@@ -34,7 +34,7 @@ public class RegistryController implements BaseController<Registry, String> {
 
     @GetMapping("/registries")
     public ResponseEntity<List<Registry>> findAll() {
-        List<Registry> result = registryService.findAll();
+        List<Registry> result = this.registryService.findAll();
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -44,7 +44,7 @@ public class RegistryController implements BaseController<Registry, String> {
     @GetMapping("/pagination-registry")
     @ResponseBody
     public Page<Registry> findAllPageable(@PageableDefault(page = 0, size = 50) Pageable pageable) {
-        Page<Registry> page = registryService.findAll(pageable);
+        Page<Registry> page = this.registryService.findAll(pageable);
         return page;
     }
 
@@ -52,7 +52,7 @@ public class RegistryController implements BaseController<Registry, String> {
     @ResponseBody
     public Page<Registry> findPageable(@RequestBody Registry entity, @PageableDefault(page = 0, size = 50) Pageable pageable) {
         Example example = Example.of(entity);
-        Page<Registry> page = registryService.findAll(example, pageable);
+        Page<Registry> page = this.registryService.findAll(example, pageable);
         return page;
     }
 
@@ -61,7 +61,7 @@ public class RegistryController implements BaseController<Registry, String> {
     public ResponseEntity<List<Registry>> search(@RequestBody Registry entity) {
         Example example = Example.of(entity);
 
-        List<Registry> result = registryService.findAll(example);
+        List<Registry> result = this.registryService.findAll(example);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -71,7 +71,7 @@ public class RegistryController implements BaseController<Registry, String> {
     @GetMapping("/registry/{id}")
     @ResponseBody
     public ResponseEntity<Registry> findById(@PathVariable @NotBlank String id) {
-        Registry entity = registryService.findById(id);
+        Registry entity = this.registryService.findById(id);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -82,7 +82,7 @@ public class RegistryController implements BaseController<Registry, String> {
     @ResponseBody
     @Validated(OnCreate.class)
     public ResponseEntity<Registry> create(@RequestBody @Valid Registry entity) {
-        Registry savedEntity = registryService.create(entity);
+        Registry savedEntity = this.registryService.create(entity);
         return ResponseEntity.ok(savedEntity);
     }
 
@@ -90,7 +90,7 @@ public class RegistryController implements BaseController<Registry, String> {
     @ResponseBody
     @Validated(OnUpdate.class)
     public ResponseEntity<Registry> update(@RequestBody @Valid Registry entity, @PathVariable @NotBlank String id) {
-        Registry updatedEntity = registryService.update(entity, id);
+        Registry updatedEntity = this.registryService.update(entity, id);
         if (updatedEntity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -100,18 +100,18 @@ public class RegistryController implements BaseController<Registry, String> {
     @DeleteMapping("/registry/{id}")
     @Validated(OnDelete.class)
     public void delete(@PathVariable @NotBlank String id) {
-        registryService.delete(id);
+        this.registryService.delete(id);
     }
 
     @GetMapping("/count-registry")
     public Long count() {
-        return registryService.count();
+        return this.registryService.count();
     }
 
     @PostMapping("/count-registry")
     public Long count(@RequestBody Registry entity) {
         Example example = Example.of(entity);
-        return registryService.count(example);
+        return this.registryService.count(example);
     }
 
 }

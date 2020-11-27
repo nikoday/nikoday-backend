@@ -34,7 +34,7 @@ public class TagController implements BaseController<Tag, String> {
 
     @GetMapping("/tags")
     public ResponseEntity<List<Tag>> findAll() {
-        List<Tag> result = tagService.findAll();
+        List<Tag> result = this.tagService.findAll();
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -44,7 +44,7 @@ public class TagController implements BaseController<Tag, String> {
     @GetMapping("/pagination-tag")
     @ResponseBody
     public Page<Tag> findAllPageable(@PageableDefault(page = 0, size = 50) Pageable pageable) {
-        Page<Tag> page = tagService.findAll(pageable);
+        Page<Tag> page = this.tagService.findAll(pageable);
         return page;
     }
 
@@ -52,7 +52,7 @@ public class TagController implements BaseController<Tag, String> {
     @ResponseBody
     public Page<Tag> findPageable(@RequestBody Tag entity, @PageableDefault(page = 0, size = 50) Pageable pageable) {
         Example example = Example.of(entity);
-        Page<Tag> page = tagService.findAll(example, pageable);
+        Page<Tag> page = this.tagService.findAll(example, pageable);
         return page;
     }
 
@@ -61,7 +61,7 @@ public class TagController implements BaseController<Tag, String> {
     public ResponseEntity<List<Tag>> search(@RequestBody Tag entity) {
         Example example = Example.of(entity);
 
-        List<Tag> result = tagService.findAll(example);
+        List<Tag> result = this.tagService.findAll(example);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -71,7 +71,7 @@ public class TagController implements BaseController<Tag, String> {
     @GetMapping("/tag/{id}")
     @ResponseBody
     public ResponseEntity<Tag> findById(@PathVariable @NotBlank String id) {
-        Tag entity = tagService.findById(id);
+        Tag entity = this.tagService.findById(id);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -82,7 +82,7 @@ public class TagController implements BaseController<Tag, String> {
     @ResponseBody
     @Validated(OnCreate.class)
     public ResponseEntity<Tag> create(@RequestBody @Valid Tag entity) {
-        Tag savedEntity = tagService.create(entity);
+        Tag savedEntity = this.tagService.create(entity);
         return ResponseEntity.ok(savedEntity);
     }
 
@@ -90,7 +90,7 @@ public class TagController implements BaseController<Tag, String> {
     @ResponseBody
     @Validated(OnUpdate.class)
     public ResponseEntity<Tag> update(@RequestBody @Valid Tag entity, @PathVariable @NotBlank String id) {
-        Tag updatedEntity = tagService.update(entity, id);
+        Tag updatedEntity = this.tagService.update(entity, id);
         if (updatedEntity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -100,18 +100,18 @@ public class TagController implements BaseController<Tag, String> {
     @DeleteMapping("/tag/{id}")
     @Validated(OnDelete.class)
     public void delete(@PathVariable @NotBlank String id) {
-        tagService.delete(id);
+        this.tagService.delete(id);
     }
 
     @GetMapping("/count-tag")
     public Long count() {
-        return tagService.count();
+        return this.tagService.count();
     }
 
     @PostMapping("/count-tag")
     public Long count(@RequestBody Tag entity) {
         Example example = Example.of(entity);
-        return tagService.count(example);
+        return this.tagService.count(example);
     }
 
 }

@@ -34,7 +34,7 @@ public class UserController implements BaseController<User, String> {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> findAll() {
-        List<User> result = userService.findAll();
+        List<User> result = this.userService.findAll();
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -44,7 +44,7 @@ public class UserController implements BaseController<User, String> {
     @GetMapping("/pagination-user")
     @ResponseBody
     public Page<User> findAllPageable(@PageableDefault(page = 0, size = 50) Pageable pageable) {
-        Page<User> page = userService.findAll(pageable);
+        Page<User> page = this.userService.findAll(pageable);
         return page;
     }
 
@@ -52,7 +52,7 @@ public class UserController implements BaseController<User, String> {
     @ResponseBody
     public Page<User> findPageable(@RequestBody User entity, @PageableDefault(page = 0, size = 50) Pageable pageable) {
         Example example = Example.of(entity);
-        Page<User> page = userService.findAll(example, pageable);
+        Page<User> page = this.userService.findAll(example, pageable);
         return page;
     }
 
@@ -61,7 +61,7 @@ public class UserController implements BaseController<User, String> {
     public ResponseEntity<List<User>> search(@RequestBody User entity) {
         Example example = Example.of(entity);
 
-        List<User> result = userService.findAll(example);
+        List<User> result = this.userService.findAll(example);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -71,7 +71,7 @@ public class UserController implements BaseController<User, String> {
     @GetMapping("/user/{id}")
     @ResponseBody
     public ResponseEntity<User> findById(@PathVariable @NotBlank String id) {
-        User entity = userService.findById(id);
+        User entity = this.userService.findById(id);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -82,7 +82,7 @@ public class UserController implements BaseController<User, String> {
     @ResponseBody
     @Validated(OnCreate.class)
     public ResponseEntity<User> create(@RequestBody @Valid User entity) {
-        User savedEntity = userService.create(entity);
+        User savedEntity = this.userService.create(entity);
         return ResponseEntity.ok(savedEntity);
     }
 
@@ -90,7 +90,7 @@ public class UserController implements BaseController<User, String> {
     @ResponseBody
     @Validated(OnUpdate.class)
     public ResponseEntity<User> update(@RequestBody @Valid User entity, @PathVariable @NotBlank String id) {
-        User updatedEntity = userService.update(entity, id);
+        User updatedEntity = this.userService.update(entity, id);
         if (updatedEntity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -100,18 +100,18 @@ public class UserController implements BaseController<User, String> {
     @DeleteMapping("/user/{id}")
     @Validated(OnDelete.class)
     public void delete(@PathVariable @NotBlank String id) {
-        userService.delete(id);
+        this.userService.delete(id);
     }
 
     @GetMapping("/count-user")
     public Long count() {
-        return userService.count();
+        return this.userService.count();
     }
 
     @PostMapping("/count-user")
     public Long count(@RequestBody User entity) {
         Example example = Example.of(entity);
-        return userService.count(example);
+        return this.userService.count(example);
     }
 
 }

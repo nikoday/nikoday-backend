@@ -34,7 +34,7 @@ public class TeamUserController implements BaseController<TeamUser, String> {
 
     @GetMapping("/team-users")
     public ResponseEntity<List<TeamUser>> findAll() {
-        List<TeamUser> result = teamUserService.findAll();
+        List<TeamUser> result = this.teamUserService.findAll();
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -44,7 +44,7 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     @GetMapping("/pagination-team-user")
     @ResponseBody
     public Page<TeamUser> findAllPageable(@PageableDefault(page = 0, size = 50) Pageable pageable) {
-        Page<TeamUser> page = teamUserService.findAll(pageable);
+        Page<TeamUser> page = this.teamUserService.findAll(pageable);
         return page;
     }
 
@@ -52,7 +52,7 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     @ResponseBody
     public Page<TeamUser> findPageable(@RequestBody TeamUser entity, @PageableDefault(page = 0, size = 50) Pageable pageable) {
         Example example = Example.of(entity);
-        Page<TeamUser> page = teamUserService.findAll(example, pageable);
+        Page<TeamUser> page = this.teamUserService.findAll(example, pageable);
         return page;
     }
 
@@ -61,7 +61,7 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     public ResponseEntity<List<TeamUser>> search(@RequestBody TeamUser entity) {
         Example example = Example.of(entity);
 
-        List<TeamUser> result = teamUserService.findAll(example);
+        List<TeamUser> result = this.teamUserService.findAll(example);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -71,7 +71,7 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     @GetMapping("/team-user/{id}")
     @ResponseBody
     public ResponseEntity<TeamUser> findById(@PathVariable @NotBlank String id) {
-        TeamUser entity = teamUserService.findById(id);
+        TeamUser entity = this.teamUserService.findById(id);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -82,7 +82,7 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     @ResponseBody
     @Validated(OnCreate.class)
     public ResponseEntity<TeamUser> create(@RequestBody @Valid TeamUser entity) {
-        TeamUser savedEntity = teamUserService.create(entity);
+        TeamUser savedEntity = this.teamUserService.create(entity);
         return ResponseEntity.ok(savedEntity);
     }
 
@@ -90,7 +90,7 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     @ResponseBody
     @Validated(OnUpdate.class)
     public ResponseEntity<TeamUser> update(@RequestBody @Valid TeamUser entity, @PathVariable @NotBlank String id) {
-        TeamUser updatedEntity = teamUserService.update(entity, id);
+        TeamUser updatedEntity = this.teamUserService.update(entity, id);
         if (updatedEntity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -100,18 +100,18 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     @DeleteMapping("/team-user/{id}")
     @Validated(OnDelete.class)
     public void delete(@PathVariable @NotBlank String id) {
-        teamUserService.delete(id);
+        this.teamUserService.delete(id);
     }
 
     @GetMapping("/count-team-user")
     public Long count() {
-        return teamUserService.count();
+        return this.teamUserService.count();
     }
 
     @PostMapping("/count-team-user")
     public Long count(@RequestBody TeamUser entity) {
         Example example = Example.of(entity);
-        return teamUserService.count(example);
+        return this.teamUserService.count(example);
     }
 
 }

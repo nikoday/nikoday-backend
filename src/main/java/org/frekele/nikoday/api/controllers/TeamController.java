@@ -33,7 +33,7 @@ public class TeamController implements BaseController<Team, String> {
 
     @GetMapping("/teams")
     public ResponseEntity<List<Team>> findAll() {
-        List<Team> result = teamService.findAll();
+        List<Team> result = this.teamService.findAll();
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -43,7 +43,7 @@ public class TeamController implements BaseController<Team, String> {
     @GetMapping("/pagination-team")
     @ResponseBody
     public Page<Team> findAllPageable(@PageableDefault(page = 0, size = 50) Pageable pageable) {
-        Page<Team> page = teamService.findAll(pageable);
+        Page<Team> page = this.teamService.findAll(pageable);
         return page;
     }
 
@@ -51,7 +51,7 @@ public class TeamController implements BaseController<Team, String> {
     @ResponseBody
     public Page<Team> findPageable(@RequestBody Team entity, @PageableDefault(page = 0, size = 50) Pageable pageable) {
         Example example = Example.of(entity);
-        Page<Team> page = teamService.findAll(example, pageable);
+        Page<Team> page = this.teamService.findAll(example, pageable);
         return page;
     }
 
@@ -60,7 +60,7 @@ public class TeamController implements BaseController<Team, String> {
     public ResponseEntity<List<Team>> search(@RequestBody Team entity) {
         Example example = Example.of(entity);
 
-        List<Team> result = teamService.findAll(example);
+        List<Team> result = this.teamService.findAll(example);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -70,7 +70,7 @@ public class TeamController implements BaseController<Team, String> {
     @GetMapping("/team/{id}")
     @ResponseBody
     public ResponseEntity<Team> findById(@PathVariable @NotBlank String id) {
-        Team entity = teamService.findById(id);
+        Team entity = this.teamService.findById(id);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -81,7 +81,7 @@ public class TeamController implements BaseController<Team, String> {
     @ResponseBody
     @Validated(OnCreate.class)
     public ResponseEntity<Team> create(@RequestBody @Valid Team entity) {
-        Team savedEntity = teamService.create(entity);
+        Team savedEntity = this.teamService.create(entity);
         return ResponseEntity.ok(savedEntity);
     }
 
@@ -89,7 +89,7 @@ public class TeamController implements BaseController<Team, String> {
     @ResponseBody
     @Validated(OnUpdate.class)
     public ResponseEntity<Team> update(@RequestBody @Valid Team entity, @PathVariable @NotBlank String id) {
-        Team updatedEntity = teamService.update(entity, id);
+        Team updatedEntity = this.teamService.update(entity, id);
         if (updatedEntity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -99,18 +99,18 @@ public class TeamController implements BaseController<Team, String> {
     @DeleteMapping("/team/{id}")
     @Validated(OnDelete.class)
     public void delete(@PathVariable @NotBlank String id) {
-        teamService.delete(id);
+        this.teamService.delete(id);
     }
 
     @GetMapping("/count-team")
     public Long count() {
-        return teamService.count();
+        return this.teamService.count();
     }
 
     @PostMapping("/count-team")
     public Long count(@RequestBody Team entity) {
         Example example = Example.of(entity);
-        return teamService.count(example);
+        return this.teamService.count(example);
     }
 
 }

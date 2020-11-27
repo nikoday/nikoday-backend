@@ -34,7 +34,7 @@ public class EmotionController implements BaseController<Emotion, String> {
 
     @GetMapping("/emotions")
     public ResponseEntity<List<Emotion>> findAll() {
-        List<Emotion> result = emotionService.findAll();
+        List<Emotion> result = this.emotionService.findAll();
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -44,7 +44,7 @@ public class EmotionController implements BaseController<Emotion, String> {
     @GetMapping("/pagination-emotion")
     @ResponseBody
     public Page<Emotion> findAllPageable(@PageableDefault(page = 0, size = 50) Pageable pageable) {
-        Page<Emotion> page = emotionService.findAll(pageable);
+        Page<Emotion> page = this.emotionService.findAll(pageable);
         return page;
     }
 
@@ -52,7 +52,7 @@ public class EmotionController implements BaseController<Emotion, String> {
     @ResponseBody
     public Page<Emotion> findPageable(@RequestBody Emotion entity, @PageableDefault(page = 0, size = 50) Pageable pageable) {
         Example example = Example.of(entity);
-        Page<Emotion> page = emotionService.findAll(example, pageable);
+        Page<Emotion> page = this.emotionService.findAll(example, pageable);
         return page;
     }
 
@@ -61,7 +61,7 @@ public class EmotionController implements BaseController<Emotion, String> {
     public ResponseEntity<List<Emotion>> search(@RequestBody Emotion entity) {
         Example example = Example.of(entity);
 
-        List<Emotion> result = emotionService.findAll(example);
+        List<Emotion> result = this.emotionService.findAll(example);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -71,7 +71,7 @@ public class EmotionController implements BaseController<Emotion, String> {
     @GetMapping("/emotion/{id}")
     @ResponseBody
     public ResponseEntity<Emotion> findById(@PathVariable @NotBlank String id) {
-        Emotion entity = emotionService.findById(id);
+        Emotion entity = this.emotionService.findById(id);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -82,7 +82,7 @@ public class EmotionController implements BaseController<Emotion, String> {
     @ResponseBody
     @Validated(OnCreate.class)
     public ResponseEntity<Emotion> create(@RequestBody @Valid Emotion entity) {
-        Emotion savedEntity = emotionService.create(entity);
+        Emotion savedEntity = this.emotionService.create(entity);
         return ResponseEntity.ok(savedEntity);
     }
 
@@ -90,7 +90,7 @@ public class EmotionController implements BaseController<Emotion, String> {
     @ResponseBody
     @Validated(OnUpdate.class)
     public ResponseEntity<Emotion> update(@RequestBody @Valid Emotion entity, @PathVariable @NotBlank String id) {
-        Emotion updatedEntity = emotionService.update(entity, id);
+        Emotion updatedEntity = this.emotionService.update(entity, id);
         if (updatedEntity == null) {
             return ResponseEntity.notFound().build();
         }
@@ -100,18 +100,18 @@ public class EmotionController implements BaseController<Emotion, String> {
     @DeleteMapping("/emotion/{id}")
     @Validated(OnDelete.class)
     public void delete(@PathVariable @NotBlank String id) {
-        emotionService.delete(id);
+        this.emotionService.delete(id);
     }
 
     @GetMapping("/count-emotion")
     public Long count() {
-        return emotionService.count();
+        return this.emotionService.count();
     }
 
     @PostMapping("/count-emotion")
     public Long count(@RequestBody Emotion entity) {
         Example example = Example.of(entity);
-        return emotionService.count(example);
+        return this.emotionService.count(example);
     }
 
 }
