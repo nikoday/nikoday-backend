@@ -18,6 +18,9 @@
         <java.version>11</java.version>
         <testcontainers.version>1.15.0</testcontainers.version>
         <commons-collections4.version>4.4</commons-collections4.version>
+        <sonar.projectKey>nikoday_nikoday-backend</sonar.projectKey>
+        <sonar.organization>nikoday</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
