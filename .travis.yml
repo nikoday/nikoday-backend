@@ -39,13 +39,13 @@ after_failure:
 before_deploy:
 
 
-#deploy:
-#    provider: heroku
-#    api_key:
-#        secure: "${HEROKU_API_KEY}"
-#    app:
-#        main: test-nikoday-backend
-#        sandbox: sandbox-nikoday-backend
+deploy:
+    provider: heroku
+    api_key:
+        secure: "${HEROKU_API_KEY}"
+    app:
+        main: test-nikoday-backend
+        sandbox: sandbox-nikoday-backend
 
 after_deploy:
 
