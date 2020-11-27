@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      NIKODAY_MONGODB_USERNAME: ${{ secrets.NIKODAY_MONGODB_USERNAME }} 
+      NIKODAY_MONGODB_PASSWORD: ${{ secrets.NIKODAY_MONGODB_PASSWORD }} 
+      NIKODAY_MONGODB_HOST: ${{ secrets.NIKODAY_MONGODB_HOST }} 
     steps:
       - uses: actions/checkout@v2
         with:
