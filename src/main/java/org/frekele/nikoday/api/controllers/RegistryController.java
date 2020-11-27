@@ -24,7 +24,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
-@RequestMapping("/nikoday")
+@RequestMapping("/")
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class RegistryController implements BaseController<Registry, String> {
 
