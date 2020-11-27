@@ -28,6 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class TeamUserController implements BaseController<TeamUser, String> {
 
+    private static final long serialVersionUID = 8246588474104304957L;
+
     private final TeamUserService teamUserService;
 
     @GetMapping("/team-users")

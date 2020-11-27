@@ -28,6 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class TagController implements BaseController<Tag, String> {
 
+    private static final long serialVersionUID = -6445545910876466120L;
+
     private final TagService tagService;
 
     @GetMapping("/tags")

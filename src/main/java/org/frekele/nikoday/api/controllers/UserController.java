@@ -28,6 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class UserController implements BaseController<User, String> {
 
+    private static final long serialVersionUID = 5796375769846326134L;
+
     private final UserService userService;
 
     @GetMapping("/users")

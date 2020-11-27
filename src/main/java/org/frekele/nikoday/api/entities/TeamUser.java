@@ -4,8 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.frekele.nikoday.api.entities.enums.Role;
 import org.frekele.nikoday.core.entities.PersistentBaseEntity;
+import org.frekele.nikoday.core.validations.OnCreate;
+import org.frekele.nikoday.core.validations.OnUpdate;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,11 +21,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "teamsUsers")
 public class TeamUser extends PersistentBaseEntity<String> {
 
-    private static final long serialVersionUID = -6068603028633620110L;
+    private static final long serialVersionUID = -816661371097518696L;
 
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private String teamId;
 
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private String userId;
+
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
+    private List<Role> roles;
 
     @Override
     public String toString() {

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public abstract class BaseService<T extends PersistentBaseEntity<ID>, ID> implements Serializable {
 
-    private static final long serialVersionUID = 6068341250259997243L;
+    private static final long serialVersionUID = 5941539014287698932L;
 
     protected abstract MongoRepository<T, ID> getRepository();
 

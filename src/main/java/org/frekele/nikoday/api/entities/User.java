@@ -11,7 +11,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -20,16 +21,20 @@ import javax.validation.constraints.NotBlank;
 @Document(collection = "users")
 public class User extends PersistentBaseEntity<String> {
 
-    private static final long serialVersionUID = -8160631409613624388L;
+    private static final long serialVersionUID = 6360917497233931033L;
 
-    @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private String name;
 
     @Indexed(unique = true)
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     @Email(groups = {OnCreate.class, OnUpdate.class})
     private String email;
 
-    @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private String password;
 
     @Override

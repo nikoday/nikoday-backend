@@ -28,6 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class EmotionController implements BaseController<Emotion, String> {
 
+    private static final long serialVersionUID = -6857439120360273886L;
+
     private final EmotionService emotionService;
 
     @GetMapping("/emotions")

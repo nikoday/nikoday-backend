@@ -28,6 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class RegistryController implements BaseController<Registry, String> {
 
+    private static final long serialVersionUID = -2935407158858517763L;
+
     private final RegistryService registryService;
 
     @GetMapping("/registries")

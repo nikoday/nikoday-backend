@@ -6,7 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.frekele.nikoday.api.entities.inners.ConfigTeam;
 import org.frekele.nikoday.core.entities.PersistentBaseEntity;
+import org.frekele.nikoday.core.validations.OnCreate;
+import org.frekele.nikoday.core.validations.OnUpdate;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -15,10 +20,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "teams")
 public class Team extends PersistentBaseEntity<String> {
 
-    private static final long serialVersionUID = -140634403636899935L;
+    private static final long serialVersionUID = -7002166674834330033L;
 
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private String name;
 
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private ConfigTeam config;
 
     @Override

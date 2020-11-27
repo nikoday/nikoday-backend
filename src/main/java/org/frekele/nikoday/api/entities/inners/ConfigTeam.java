@@ -5,6 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.frekele.nikoday.core.entities.BaseEntity;
+import org.frekele.nikoday.core.validations.OnCreate;
+import org.frekele.nikoday.core.validations.OnUpdate;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -12,8 +17,10 @@ import org.frekele.nikoday.core.entities.BaseEntity;
 @EqualsAndHashCode(callSuper = true)
 public class ConfigTeam extends BaseEntity {
 
-    private static final long serialVersionUID = -4745121873910744214L;
+    private static final long serialVersionUID = 2804131198761832701L;
 
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private Boolean disabled;
 
     @Override

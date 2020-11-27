@@ -13,10 +13,14 @@ import org.springframework.data.mongodb.core.mapping.BasicMongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
+import java.io.Serializable;
+
 @Log4j2
 @Configuration
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class MongoConfiguration {
+public class MongoConfiguration implements Serializable {
+
+    private static final long serialVersionUID = 5258667968935154436L;
 
     private final MongoTemplate mongoTemplate;
 

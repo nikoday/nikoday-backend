@@ -15,7 +15,7 @@ import java.time.Instant;
 @Builder
 public class PersistentBaseEntity<ID> extends BaseEntity {
 
-    private static final long serialVersionUID = -8160631409613624388L;
+    private static final long serialVersionUID = 3083466711317102354L;
 
     @Id
     private ID id;

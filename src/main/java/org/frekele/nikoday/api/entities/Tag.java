@@ -5,8 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.frekele.nikoday.core.entities.PersistentBaseEntity;
+import org.frekele.nikoday.core.validations.OnCreate;
+import org.frekele.nikoday.core.validations.OnUpdate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -15,9 +20,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "tags")
 public class Tag extends PersistentBaseEntity<String> {
 
-    private static final long serialVersionUID = -706294954861215452L;
+    private static final long serialVersionUID = -1725418449757183648L;
 
     @Indexed(unique = true)
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private String name;
 
     @Override

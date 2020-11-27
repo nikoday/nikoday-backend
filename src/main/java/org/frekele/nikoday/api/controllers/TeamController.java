@@ -27,6 +27,8 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class TeamController implements BaseController<Team, String> {
 
+    private static final long serialVersionUID = 6664895076483510290L;
+
     private final TeamService teamService;
 
     @GetMapping("/teams")

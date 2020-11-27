@@ -14,9 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "registries")
 public class Registry extends PersistentBaseEntity<String> {
 
-    private static final long serialVersionUID = 1565613706639712946L;
+    private static final long serialVersionUID = 1775088135553520224L;
 
     private String name;
+
 
     @Override
     public String toString() {
