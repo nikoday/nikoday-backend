@@ -1,0 +1,28 @@
+package org.frekele.nikoday.api.entities;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.frekele.nikoday.core.entities.PersistentBaseEntity;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Document(collection = "teamsUsers")
+public class TeamUser extends PersistentBaseEntity<String> {
+
+    private static final long serialVersionUID = -6068603028633620110L;
+
+    private String teamId;
+
+    private String userId;
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+}
