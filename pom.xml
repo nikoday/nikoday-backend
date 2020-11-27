@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.frekele.nikoday</groupId>
     <artifactId>nikoday</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>nikoday</name>
     <description>NikoDay - Management NikoNiko Calendar - Back-end API</description>
 
