@@ -69,9 +69,51 @@ jobs:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
         run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report
       
-      - name: Deploy Heroku
-        uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
+      #- name: Deploy Heroku
+      #  uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
+      #  with:
+      #    heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #    heroku_app_name: "${{ env.BRANCH_NAME }}-nikoday-backend"
+      #    heroku_email: "leandro@frekele.org"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "${{ env.BRANCH_NAME }}-nikoday-backend"
-          heroku_email: "leandro@frekele.org"
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: sa-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: nikoday-backend
+          IMAGE_TAG: ${{ env.BRANCH_NAME }}
+          #IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg ACCESS_ARG=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg SECRET_ARG=${{ secrets.AWS_SECRET_ACCESS_KEY }} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition-${{ env.BRANCH_NAME }}.json
+          container-name: nikoday-backend-${{ env.BRANCH_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: nikoday-service-${{ env.BRANCH_NAME }}
+          cluster: nikoday-cluster-${{ env.BRANCH_NAME }}
+          wait-for-service-stability: true
