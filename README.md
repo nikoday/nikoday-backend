@@ -14,9 +14,11 @@
 
 ## Back-end API Spring Boot v2.3.x
 
-### SandBox - (Branch sandbox)
-- https://sandbox-nikoday-backend.herokuapp.com/api/
+### main - (main, master, dev) Branch
+- https://main-nikoday.frekele.org/api/
+
+### SandBox - (Branch for showcase)
+- https://sandbox-nikoday.frekele.org/api/
 
 #### Front-end Repository
 - https://github.com/nikoday/nikoday-frontend
- 
