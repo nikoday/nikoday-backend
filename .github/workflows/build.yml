@@ -117,4 +117,4 @@ jobs:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: nikoday-service-${{ env.BRANCH_NAME }}
           cluster: nikoday-cluster-${{ env.BRANCH_NAME }}
-          wait-for-service-stability: true
+          wait-for-service-stability: false
