@@ -20,5 +20,9 @@
 ### SandBox - (Branch for showcase)
 - https://sandbox-nikoday.frekele.org/api/
 
+#### Swagger
+- https://sandbox-nikoday.frekele.org/api/swagger-ui
+
 #### Front-end Repository
 - https://github.com/nikoday/nikoday-frontend
+
