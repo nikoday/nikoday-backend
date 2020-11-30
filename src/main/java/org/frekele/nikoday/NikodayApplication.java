@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
                 HibernateJpaAutoConfiguration.class
         }
 )
-@EnableMongoRepositories()
+@EnableMongoRepositories
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class NikodayApplication {
 

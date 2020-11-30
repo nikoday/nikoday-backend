@@ -28,6 +28,12 @@ management:
       show-details: always
 info:
   app:
-    name: nikoday-backend
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
     github: https://github.com/nikoday/nikoday-backend/tree/sandbox
     profile: sandbox
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    disable-swagger-default-url: true
