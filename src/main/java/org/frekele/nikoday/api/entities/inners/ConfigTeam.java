@@ -16,10 +16,16 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 public class ConfigTeam extends BaseEntity {
 
-    private static final long serialVersionUID = 2804131198761832701L;
+    private static final long serialVersionUID = -8693700194331423929L;
 
+    //Se time está ativo.
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
-    private Boolean disabled;
+    private Boolean enabled;
+
+    //Se true, então ativa opção para que outros usuários,
+    // não possam ver que marcou emoção.
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    private Boolean privateMode;
 
     @Override
     public String toString() {
