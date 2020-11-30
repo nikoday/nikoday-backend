@@ -64,7 +64,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:sa-east-1:362770054718:task-definition/nikoday-task-definitions-main:1",
+  "taskDefinitionArn": "arn:aws:ecs:sa-east-1:362770054718:task-definition/nikoday-task-definitions-main:5",
   "family": "nikoday-task-definitions-main",
   "requiresAttributes": [
     {
@@ -116,7 +116,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 1,
+  "revision": 5,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
