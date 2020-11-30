@@ -17,3 +17,16 @@ logging:
     org.hibernate: INFO
     org.mongodb: INFO
     org.frekele.nikoday: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+info:
+  app:
+    name: nikoday-backend
+    github: https://github.com/nikoday/nikoday-backend/tree/main
+    profile: dev
