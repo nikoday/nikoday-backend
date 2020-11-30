@@ -19,6 +19,7 @@
         <testcontainers.version>1.15.0</testcontainers.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <jacoco.version>0.8.6</jacoco.version>
+        <springdoc.version>1.5.0</springdoc.version>
 
         <sonar.projectKey>nikoday_nikoday-backend</sonar.projectKey>
         <sonar.organization>nikoday</sonar.organization>
@@ -107,7 +108,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.5.0</version>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <!--Tests-->
