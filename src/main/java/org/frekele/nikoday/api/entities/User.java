@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.frekele.nikoday.core.entities.PersistentBaseEntity;
+import org.frekele.nikoday.core.validations.OnAuthentication;
 import org.frekele.nikoday.core.validations.OnCreate;
 import org.frekele.nikoday.core.validations.OnUpdate;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -25,17 +26,20 @@ public class User extends PersistentBaseEntity<String> {
 
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
     @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
-    private String name;
+    private String username;
 
     @Indexed(unique = true)
-    @NotNull(groups = {OnCreate.class, OnUpdate.class})
-    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
-    @Email(groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(groups = {OnCreate.class, OnUpdate.class, OnAuthentication.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class, OnAuthentication.class})
+    @Email(groups = {OnCreate.class, OnUpdate.class, OnAuthentication.class})
     private String email;
 
-    @NotNull(groups = {OnCreate.class, OnUpdate.class})
-    @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(groups = {OnCreate.class, OnUpdate.class, OnAuthentication.class})
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class, OnAuthentication.class})
     private String password;
+
+    //Usando somente para retorno.
+    private String token;
 
     @Override
     public String toString() {

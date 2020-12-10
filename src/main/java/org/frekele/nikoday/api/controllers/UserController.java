@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.frekele.nikoday.api.entities.User;
 import org.frekele.nikoday.api.services.UserService;
 import org.frekele.nikoday.core.controllers.BaseController;
+import org.frekele.nikoday.core.validations.OnAuthentication;
 import org.frekele.nikoday.core.validations.OnCreate;
 import org.frekele.nikoday.core.validations.OnDelete;
 import org.frekele.nikoday.core.validations.OnUpdate;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -78,13 +80,6 @@ public class UserController implements BaseController<User, String> {
         return ResponseEntity.ok(entity);
     }
 
-    @PostMapping("/user")
-    @ResponseBody
-    @Validated(OnCreate.class)
-    public ResponseEntity<User> create(@RequestBody @Valid User entity) {
-        User savedEntity = this.userService.create(entity);
-        return ResponseEntity.ok(savedEntity);
-    }
 
     @PutMapping("/user/{id}")
     @ResponseBody
@@ -114,4 +109,31 @@ public class UserController implements BaseController<User, String> {
         return this.userService.count(example);
     }
 
+    @PostMapping({"/user", "/sign-up"})
+    @ResponseBody
+    @Validated(OnCreate.class)
+    public ResponseEntity<User> create(@RequestBody @Valid User entity) {
+        User savedEntity = this.userService.create(entity);
+        return ResponseEntity.ok(savedEntity);
+    }
+
+    @PostMapping({"authenticate", "/sign-in"})
+    @ResponseBody
+    @Validated(OnAuthentication.class)
+    public ResponseEntity<User> authenticate(@RequestBody @Valid User entity) {
+        User authenticateEntity = this.userService.authenticate(entity);
+        return authenticateEntity != null
+                ? ResponseEntity.ok(authenticateEntity)
+                : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    @PostMapping({"/token-validate", "validate-token"})
+    @ResponseBody
+    @Validated(OnAuthentication.class)
+    public ResponseEntity<User> tokenValidate(@RequestHeader(value = "Authorization") String authorization) {
+        User authenticateEntity = this.userService.tokenValidate(authorization);
+        return authenticateEntity != null
+                ? ResponseEntity.ok(authenticateEntity)
+                : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 }
