@@ -31,6 +31,17 @@ public class Registry extends PersistentBaseEntity<String> {
     private Emotion emotion;
 
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    private Integer day;
+
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    private Integer month;
+
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    private Integer year;
+
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
+    private String dayOfWeek;
+
     private Instant calendarDateTime;
 
     private List<Tag> tags;
