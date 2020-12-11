@@ -24,5 +24,9 @@ public class RegistryService extends BaseService<Registry, String> {
         return this.registryRepository;
     }
 
+    public Registry findByTeamUserIdAndDayAndMonthAndYear(String teamUserId, Integer day, Integer month, Integer year) {
+        return this.getRepository().findByTeamUserIdAndDayAndMonthAndYear(teamUserId, day, month, year);
+    }
+
 
 }

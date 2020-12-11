@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegistryRepository extends MongoRepository<Registry, String>, BaseRepository<Registry, String> {
 
+    Registry findByTeamUserIdAndDayAndMonthAndYear(String teamUserId, Integer day, Integer month, Integer year);
 }

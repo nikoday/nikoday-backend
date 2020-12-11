@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.frekele.nikoday.api.entities.Team;
+import org.frekele.nikoday.api.entities.inners.NikoCalendar;
 import org.frekele.nikoday.api.services.TeamService;
 import org.frekele.nikoday.core.controllers.BaseController;
 import org.frekele.nikoday.core.validations.OnCreate;
@@ -111,6 +112,16 @@ public class TeamController implements BaseController<Team, String> {
     public Long count(@RequestBody Team entity) {
         Example example = Example.of(entity);
         return this.teamService.count(example);
+    }
+
+    @GetMapping("/team/{id}/niko-calendar/{weekOfYear}")
+    @ResponseBody
+    public ResponseEntity<NikoCalendar> loadNikoCalendar(@PathVariable @NotBlank String id, @PathVariable @NotBlank String weekOfYear) {
+        NikoCalendar entity = this.teamService.loadNikoCalendar(id, weekOfYear);
+        if (entity == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(entity);
     }
 
 }
