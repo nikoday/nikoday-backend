@@ -8,6 +8,7 @@ import org.frekele.nikoday.core.entities.PersistentBaseEntity;
 import org.frekele.nikoday.core.validations.OnAuthentication;
 import org.frekele.nikoday.core.validations.OnCreate;
 import org.frekele.nikoday.core.validations.OnUpdate;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -38,7 +39,8 @@ public class User extends PersistentBaseEntity<String> {
     @NotEmpty(groups = {OnCreate.class, OnUpdate.class, OnAuthentication.class})
     private String password;
 
-    //Usando somente para retorno.
+    //Usado somente no retorno.
+    @Transient
     private String token;
 
     @Override

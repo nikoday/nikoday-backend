@@ -32,8 +32,8 @@ public class TeamController implements BaseController<Team, String> {
     private final TeamService teamService;
 
     @GetMapping("/teams")
-    public ResponseEntity<List<Team>> findAll() {
-        List<Team> result = this.teamService.findAll();
+    public ResponseEntity<List<Team>> findAll(@RequestParam(required = false) boolean eager) {
+        List<Team> result = this.teamService.findAll(eager);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -69,8 +69,8 @@ public class TeamController implements BaseController<Team, String> {
 
     @GetMapping("/team/{id}")
     @ResponseBody
-    public ResponseEntity<Team> findById(@PathVariable @NotBlank String id) {
-        Team entity = this.teamService.findById(id);
+    public ResponseEntity<Team> findById(@PathVariable @NotBlank String id, @RequestParam(required = false) boolean eager) {
+        Team entity = this.teamService.findById(id, eager);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }

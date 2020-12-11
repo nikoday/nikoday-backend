@@ -8,10 +8,12 @@ import org.frekele.nikoday.api.entities.inners.ConfigTeam;
 import org.frekele.nikoday.core.entities.PersistentBaseEntity;
 import org.frekele.nikoday.core.validations.OnCreate;
 import org.frekele.nikoday.core.validations.OnUpdate;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +32,10 @@ public class Team extends PersistentBaseEntity<String> {
 
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
     private ConfigTeam config;
+
+    //Usado somente no retorno.
+    @Transient
+    private List<TeamUser> teamUsers;
 
     @Override
     public String toString() {

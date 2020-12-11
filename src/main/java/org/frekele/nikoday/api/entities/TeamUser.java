@@ -8,6 +8,7 @@ import org.frekele.nikoday.api.entities.enums.Role;
 import org.frekele.nikoday.core.entities.PersistentBaseEntity;
 import org.frekele.nikoday.core.validations.OnCreate;
 import org.frekele.nikoday.core.validations.OnUpdate;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
@@ -34,6 +35,14 @@ public class TeamUser extends PersistentBaseEntity<String> {
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
     @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private List<Role> roles;
+
+    //usado somente no retorno
+    @Transient
+    private Team team;
+
+    //usado somente no retorno
+    @Transient
+    private User user;
 
     @Override
     public String toString() {

@@ -33,8 +33,8 @@ public class TeamUserController implements BaseController<TeamUser, String> {
     private final TeamUserService teamUserService;
 
     @GetMapping("/team-users")
-    public ResponseEntity<List<TeamUser>> findAll() {
-        List<TeamUser> result = this.teamUserService.findAll();
+    public ResponseEntity<List<TeamUser>> findAll(@RequestParam(required = false) boolean eager) {
+        List<TeamUser> result = this.teamUserService.findAll(eager);
         if (result == null || result.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -70,8 +70,8 @@ public class TeamUserController implements BaseController<TeamUser, String> {
 
     @GetMapping("/team-user/{id}")
     @ResponseBody
-    public ResponseEntity<TeamUser> findById(@PathVariable @NotBlank String id) {
-        TeamUser entity = this.teamUserService.findById(id);
+    public ResponseEntity<TeamUser> findById(@PathVariable @NotBlank String id, @RequestParam(required = false) boolean eager) {
+        TeamUser entity = this.teamUserService.findById(id, eager);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
